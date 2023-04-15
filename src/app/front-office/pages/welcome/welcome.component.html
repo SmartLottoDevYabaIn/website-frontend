@@ -1,0 +1,99 @@
+<div class="front">
+<!-- header begin -->
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 d-xl-flex d-lg-flex d-block align-items-center">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-6 d-xl-block d-lg-block d-flex align-items-center">
+                        <div class="logo">
+                            <a>
+                                <img src="../../../assets/img/sl_darkBG.png" alt="LOGO" style="width: 200px; height: 40px;">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6 d-xl-none d-lg-none d-flex justify-content-end">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6">
+                <div class="main-menu">
+                    <nav class="navbar navbar-expand-lg">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <app-navigation></app-navigation>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 d-xl-flex d-lg-flex d-none align-items-center justify-content-end nav-item dropdown">
+                <app-connexion></app-connexion>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- header end -->
+
+<!-- banner begin -->
+<div class="banner">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-6">
+                <div class="banner-content">
+                    <h4 class="sub-title">{{ 'passionOnlineLotto' | translate }}?</h4>
+                    <h1 class="title">{{ 'our' | translate }} <span class="special">{{ 'lottoIa' | translate }}</span> {{ 'guarantees' | translate }} 
+                        <span class="b-spc">{{ 'reliablePred' | translate }}</span>.</h1>
+                    <div class="all-btns">
+                        <a href="lotteries.html" class="btn-pok">{{ 'playLotto' | translate }}<i
+                                class="fa-solid fa-angle-right"></i></a>
+                        <a href="about.html" class="btn-pok-2">{{ 'seeMore' | translate }}<i class="fa-solid fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-8 col-sm-9 d-xl-flex d-lg-flex d-block align-items-end">
+                <div class="part-img">
+                    <img class="main-img" src="assets/img/banner-img.png" alt="">
+                    <img src="assets/img/power-ball.png" alt="" class="power-ball pok-1">
+                    <img src="assets/img/power-ball2.png" alt="" class="power-ball pok-2">
+                    <img src="assets/img/power-ball3.png" alt="" class="power-ball pok-3">
+                    <img src="assets/img/power-ball4.png" alt="" class="power-ball pok-4">
+                    <img src="assets/img/power-ball5.png" alt="" class="power-ball pok-5">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- banner end -->
+
+<!-- about begin -->
+<app-about-us></app-about-us>
+<!-- about end -->
+
+<app-lotto-list></app-lotto-list>
+
+<!-- lottery begin -->
+<!-- <app-lotto-demo></app-lotto-demo> -->
+<!-- lottery end -->
+
+<!-- cta begin -->
+<app-query></app-query>
+<!-- cta end -->
+
+<!-- working process begin -->
+<app-how-it-work></app-how-it-work>
+<!-- working process end -->
+
+<!-- feature begin -->
+<app-best></app-best>
+<!-- feature end -->
+
+<!-- testimonial begin -->
+<app-testimonial></app-testimonial>
+<!-- testimonial end -->
+<app-footer></app-footer>
+<!-- back to top button end -->
+</div>

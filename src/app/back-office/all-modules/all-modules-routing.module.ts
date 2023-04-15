@@ -1,0 +1,59 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AllModulesComponent } from 'src/app/back-office/all-modules/all-modules.component';
+import { AuthenticationGuard } from 'src/app/services/guard/auth/authentication.guard';
+
+const routes: Routes = [
+  {
+    path: "",
+    redirectTo: "index",
+    pathMatch: "full",
+  },
+  {
+    path: "",
+    component: AllModulesComponent,
+    children: [
+
+      { path: '', redirectTo: 'index', pathMatch: 'full' },
+      {
+        path: 'index',
+        loadChildren: () =>
+          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+        canActivate: [AuthenticationGuard],
+
+      },
+      {
+        path: 'setting',
+        loadChildren: () =>
+          import('./setting/setting.module').then((m) => m.SettingModule),
+        canActivate: [AuthenticationGuard],
+
+      },
+      {
+        path: 'profile',
+        loadChildren: () =>
+          import('./profile/profile.module').then(
+            (m) => m.ProfileModule
+          ),
+        canActivate: [AuthenticationGuard],
+
+      },
+      {
+        path: 'lotteries',
+        loadChildren: () =>
+          import('./lotteries/lotteries.module').then(
+            (m) => m.LotteriesModule
+          ),
+        canActivate: [AuthenticationGuard],
+
+      },
+      { path: '**', redirectTo: 'index', pathMatch: 'full' },
+    ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class AllModulesRoutingModule { }
