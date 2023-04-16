@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">For:
-  <a href="https://yaba-in.com" target="_blank"><strong>SmartestLotto.</strong></a>
+  <a href="https://smartestlotto.io" target="_blank"><strong>SmartestLotto.</strong></a>
   <br>
 </p>
 
