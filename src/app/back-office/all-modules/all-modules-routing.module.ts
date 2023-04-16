@@ -23,6 +23,13 @@ const routes: Routes = [
 
       },
       {
+        path: 'customers',
+        loadChildren: () =>
+          import('./customers/customers.module').then((m) => m.CustomersModule),
+        canActivate: [AuthenticationGuard],
+
+      },
+      {
         path: 'setting',
         loadChildren: () =>
           import('./setting/setting.module').then((m) => m.SettingModule),

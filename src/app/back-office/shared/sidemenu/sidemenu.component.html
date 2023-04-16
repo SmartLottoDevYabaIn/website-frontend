@@ -118,9 +118,10 @@
 				<li [class.active]="base === 'setting'">
 					<a [routerLink]="'setting/settings'"><i data-feather="settings"></i> <span>{{'settings' | translate}}</span></a>
 				</li>
-				<li [class.active]="base === 'user'">
-					<a ><i data-feather="users"></i> <span>{{'users' | translate}}</span></a>
-				</li> 
+				<li [class.active]="base === 'customers'">
+					<a [routerLink]="'/customers/customers-list'"><i data-feather="users"></i>
+						<span>{{'users' | translate}}</span></a>
+				</li>
 				<li [class.active]="base === 'profile'">
 					<a [routerLink]="'/profile'"><i data-feather="file-text"></i> <span>{{'profile' | translate}} Log</span></a>
 				</li> 

@@ -93,62 +93,6 @@ getUserInformations() {
     }*/
   }
 
-  /*
-  * resetPassword is used to reset your password.
-  */
-  resetPassword() {
-    this.toastr.success('Email Sent', 'Success', {timeOut: 5000});
-    this.router.navigate(['login']);
-  }
-
-  
-
-  // permet denvoyer le code au user par mail pour reset son password
-  sendCodeUserByEmail(data: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const params = {
-        'email': data
-      };
-      this.api.post('api/v01/recover-user/by-email?_format=hal_json', JSON.stringify(params)).subscribe(success => {
-        resolve(success);
-      }, error => {
-        reject(error);
-      });
-    });
-  }
-
-  // permet de valider le code renseigné par le user
-  validateCodeEmailUser(data: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const params = {
-        'user.field_email': data.user.field_email,
-        'user_code': data.user_code
-      };
-      this.api.post(`api/v01/recover-user/by-email/validate-code`, JSON.stringify(params)).subscribe(success => {
-        resolve(success);
-      }, error => {
-        reject(error);
-      });
-    });
-  }
-
-  // permet de changer le password du user dès lors quil a renseigné le bon code
-  changeUserPassword(data: any): Promise<any> {
-    return new Promise((resolve, reject) => {
-      const params = {
-        'user.field_email': data.user.field_email,
-        'user_code': data.user_code,
-        'user.field_password': data.user.field_password
-      };
-      this.api.post(`api/v01/recover-user/by-email/change-password`, JSON.stringify(params)).subscribe(success => {
-        resolve(success);
-      }, error => {
-        reject(error);
-      });
-    });
-  }
-
-
   // Permet de get le user connected en renvoyant toutes les infos nécessaires sur le profil du user
   userConnectedInformations(): Promise<any> {
 
@@ -206,6 +150,7 @@ getUserInformations() {
     user.field_websiteLink= userApiData.adresse.websiteLink;
     return user;
   }
+
   parseDataToApi(user:User):Record<string|number,any>
   {
     return {
@@ -224,6 +169,7 @@ getUserInformations() {
       }
     }
   }
+
   // permet d'update les infos d'un user
   UpdateUser(nid: string, token: string, data: any): Promise<any> {
 
@@ -515,4 +461,66 @@ getUserInformations() {
     })
   }
 
+
+  // Get News to server
+  getPageUsers(pageNumber?: number, itemsPerPage?: number): Promise<any> {
+    console.log('page nomber: ', pageNumber);
+    if (!pageNumber) {
+      pageNumber = 1;
+    }
+    if (!itemsPerPage) {
+      itemsPerPage = 5;
+    }
+    console.log('page nomber second: ', pageNumber);
+
+    return new Promise((resolve, reject) => {
+      const headers = {
+        'Content-Type': 'application/ld+json',
+        'Accept': 'application/json',
+      };
+
+      const body = {
+        'page': pageNumber,
+        'itemsPerPage': itemsPerPage,
+      };
+
+      this.api.get('news', headers, body)
+        .subscribe(data => {
+          // this.toastr.success("Les données ont été récupérées du serveur.", 'Success');
+          // console.log(data);
+          resolve(data);
+          return 0;
+
+        }), (error: any) =>  {
+          this.toastr.error('Can t get news', '500 Error');
+          console.log(error);
+          reject(error);
+        };
+    });
+  }
+
+
+  // Get News to server
+  getAllUsers(): Promise<any> {
+
+    return new Promise((resolve, reject) => {
+      const headers = {
+        'Content-Type': 'application/ld+json',
+        'Authorization': localStorage.getItem("access-token"),
+      };
+
+      const body = {};
+
+      this.api.get('users', headers, body)
+        .subscribe(data => {
+          resolve(data);
+          return 0;
+
+        }), (error: any) =>  {
+          this.toastr.error('Can t get news', 'Error', {timeOut: 5000});
+          console.log(error);
+          reject(error);
+        };
+    });
+  }
 }

@@ -64,6 +64,8 @@ export class SidemenuComponent implements OnInit {
     });
 
   }
+
+  
   ngOnInit(): void {
     this.translate.use(this.translationService.getLanguage());
 
