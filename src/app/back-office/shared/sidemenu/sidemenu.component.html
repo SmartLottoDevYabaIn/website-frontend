@@ -114,12 +114,15 @@
 				</li>
 				<li [class.active]="base === 'lotteries'">
 					<a [routerLink]="'/lotteries'"><i data-feather="disc"></i> <span>{{'lotteries' | translate}}</span></a>
-				</li> 
+				</li>
 				<li [class.active]="base === 'setting'">
 					<a [routerLink]="'setting/settings'"><i data-feather="settings"></i> <span>{{'settings' | translate}}</span></a>
 				</li>
 				<li [class.active]="base === 'profile'">
-					<a [routerLink]="'/profile'"><i data-feather="user-plus"></i> <span>{{'profile' | translate}} Log</span></a>
+					<a ><i data-feather="users"></i> <span>{{'users' | translate}}</span></a>
+				</li> 
+				<li [class.active]="base === 'profile'">
+					<a [routerLink]="'/profile'"><i data-feather="file-text"></i> <span>{{'profile' | translate}} Log</span></a>
 				</li> 
 			</ul>
 		</div>

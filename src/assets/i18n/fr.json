@@ -119,7 +119,6 @@
     "emailResetSended": "Un mail de vérification a été envoyé à votre adresse email",
     "seeSpam": "Vérifiez également vos 'SPAM'. Si vous ne l'avez pas reçu, cliquez sur Renvoyer.",
     "connectPickup": "Connectez-vous et choisissez les numéros chance en un seul clic.",
-    "faq": "QFP",
     "user": {
         "addressLine": "Addresse",
         "firstName": "Nom",
@@ -217,5 +216,15 @@
     "authority": {
         "title" : "Notre staf",
         "subTitle" : "une équipe passionnée de loto"
+    },
+    "faq": {
+        "faq": "QFP",
+        "title": "Questions Fréquament posées",
+        "subTitle": "Obtenez une réponse rapide à vos questions",
+        "submitQuestion": "Soumettre une question",
+        "answerAsap": "Nous y répondrons le plus rapidement possible.",
+        "yourEmail": "Votre Email ici",
+        "yourQuestion": "Rédigez votre question ici...",
+        "submit": "Soumettre"
     }
 }

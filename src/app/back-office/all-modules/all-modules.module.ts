@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { ProgressIndeterminateModule } from 'src/app/front-office/shared/progress-indeterminate/progress-indeterminate.module';
+import { FooterModule } from '../shared/footer/footer.module';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ProgressIndeterminateModule } from 'src/app/front-office/shared/progres
     HttpClientModule,
     RouterModule,
     ReactiveFormsModule,
+    FooterModule,
     ProgressIndeterminateModule,
     TranslateModule.forRoot({
       loader: {

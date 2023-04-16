@@ -119,7 +119,6 @@
     "emailResetSended": "A verification email has been sent to your email",
     "seeSpam": "Vérifiez également dans vos 'SPAM'. Si vous ne l'avez pas reçu, cliquez sur Renvoyer.",
     "connectPickup": "Sign in and pick lucky number with just one click.",
-    "faq": "FAQ",
     "user": {
         "addressLine": "Address Line",
         "firstName": "First Name",
@@ -216,5 +215,15 @@
     "authority": {
         "title" : "our authority",
         "subTitle" : "we've lotto passionate team"
+    },
+    "faq": {
+        "faq": "FAQ",
+        "title": "frequently asked questions",
+        "subTitle": "Get Quick Answer to Your Questions",
+        "submitQuestion": "Submit a question",
+        "answerAsap": "We’ll answer it ASAP by mailing.",
+        "yourEmail": "Your mail address here",
+        "yourQuestion": "Write your question here...",
+        "submit": "Submit"
     }
 }

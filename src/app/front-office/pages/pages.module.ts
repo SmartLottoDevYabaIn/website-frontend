@@ -7,6 +7,7 @@ import { HttpLoaderFactory } from 'src/app/app.module';
 import { HttpClient } from '@angular/common/http';
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
+import { FooterModule } from '../shared/footer/footer.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ imports: [
   RouterModule,
   PagesRoutingModule,
   ReactiveFormsModule,
+  FooterModule,
   TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,

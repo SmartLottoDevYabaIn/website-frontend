@@ -7,18 +7,21 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from '../../auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationGuard implements CanActivate {
-  constructor(public router: Router) {}
+  constructor(private router: Router,
+    private authService: AuthService) {}
 
-  canActivate(): boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const currentUser = this.authService.userData;
     if (localStorage.getItem('access-token') && localStorage.getItem('user-data')) {
       return true;
     } else {
-      this.router.navigate(['/front/welcome']);
+      this.router.navigate(['/front/welcome'], { queryParams: { returnUrl: state.url } });
       return false;
     }
   }

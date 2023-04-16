@@ -10,7 +10,6 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { TranslationService } from './services/translation/language.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from './front-office/shared/footer/footer.component';
 import { NavigationComponent } from './front-office/shared/navigation/navigation.component';
 import { AuthentificationModule } from './front-office/pages/authentification/authentification.module';
 // import { PagesModule } from './front-office/pages/pages.module';
@@ -50,6 +49,7 @@ import { ProgressIndeterminateModule } from './front-office/shared/progress-inde
 import { LottoDemoModule } from './front-office/sections/lotto-demo/lotto-demo.module';
 import { LottoModule } from './front-office/sections/lotto/lotto.module';
 import { LottoListModule } from './front-office/sections/lotto-list/lotto-list.module';
+import { FooterModule } from './front-office/shared/footer/footer.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -82,7 +82,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ForgotPwdComponent,
 
     // shared sections
-    FooterComponent,
     NavigationComponent,
 
     // Sections
@@ -108,6 +107,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProgressIndeterminateModule,
     DataTablesModule,
     LottoModule,
+    FooterModule,
     LottoListModule,
     ToastrModule.forRoot({
       positionClass :'toast-bottom-right'
@@ -126,7 +126,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslationService],
   bootstrap: [AppComponent],
   exports: [
-    FooterComponent,
     NavigationComponent
   ]
 })
