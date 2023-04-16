@@ -241,11 +241,11 @@ getUserInformations() {
         // Les 2 cas qui suivent sont utilisés pour enregistrer le pays du user en fonction de la langue choisie dans le système. N.B: 1 seul cas parmi les 2 est utilisé.
 
         // Cas 1: ceci est utilisé pour enregistrer le pays du user avec choix de la langue English (uuid est obtenu à partir du numéro 12)
-        'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_country': [
+        'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_country': [
           {
             '_links': {
               'type': {
-                'href': 'http://dev.sdkgames.com/karryngo/rest/type/taxonomy_term/countries'
+                'href': 'https://api-dev.smartestlotto.io/karryngo/rest/type/taxonomy_term/countries'
               }
             },
             'uuid': [
@@ -258,11 +258,11 @@ getUserInformations() {
 
         '_embedded': {
           // Ceci est utilisé s'il y a le ID du type (ID Card ou Passport ou ...) (représente le ID type (ID Card ou Passport) obtenu à partir du numéro 6)
-          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_id_type': [
+          'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_id_type': [
             {
               '_links': {
                 'type': {
-                  'href': 'http://dev.sdkgames.com/karryngo/rest/type/taxonomy_term/id_type'
+                  'href': 'https://api-dev.smartestlotto.io/karryngo/rest/type/taxonomy_term/id_type'
                 }
               },
               'uuid': [
@@ -274,11 +274,11 @@ getUserInformations() {
           ],
 
           // Ceci est utilisé pour lier l'image au profil du user. On utilise le numéro 7 pour save une image puis récupérer son uuid qu'on renseigne en bas
-          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user_picture': [
+          'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user_picture': [
             {
               '_links': {
                 'type': {
-                  'href': 'http://dev.sdkgames.com/karryngo/rest/type/file/file'
+                  'href': 'https://api-dev.smartestlotto.io/karryngo/rest/type/file/file'
                 }
               },
               'uuid': [
@@ -291,11 +291,11 @@ getUserInformations() {
           ],
 
           // Cas 1: ceci est utilisé pour enregistrer le pays du user avec choix de la langue English (uuid est obtenu à partir du numéro 12)
-          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_country': [
+          'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_country': [
             {
               '_links': {
                 'type': {
-                  'href': 'http://dev.sdkgames.com/karryngo/rest/type/taxonomy_term/countries'
+                  'href': 'https://api-dev.smartestlotto.io/karryngo/rest/type/taxonomy_term/countries'
                 }
               },
               'uuid': [
@@ -307,11 +307,11 @@ getUserInformations() {
             }
           ],
           // Cas 2: ceci est utilisé pour enregistrer le pays du user avec choix de la langue Français (uuid est obtenu à partir du numéro 13)
-          /* 'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_pays': [
+          /* 'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_pays': [
             {
               '_links': {
                 'type': {
-                  'href': 'http://dev.sdkgames.com/karryngo/rest/type/taxonomy_term/pays'
+                  'href': 'https://api-dev.smartestlotto.io/karryngo/rest/type/taxonomy_term/pays'
                 }
               },
               'uuid': [
@@ -324,16 +324,16 @@ getUserInformations() {
           ], */
 
           // Ceci est utilisé pour enregistrer les différentes langues choisies par le user (uuid est obtenu à partir du numéro 11).
-          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_language': data.user.field_language || [],
+          'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_language': data.user.field_language || [],
 
           // ceci est ajouté pour mettre à jour les différents types de service que le user offre (Services offered)
-          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_choose_type_of_services': data.user.field_choose_type_of_services || [],
+          'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_choose_type_of_services': data.user.field_choose_type_of_services || [],
 
           // ceci est utilisé pour mettre à jour le choix du pays avec ces villes
-          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_interested_countries': data.user.field_interested_countries || [],
+          'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_interested_countries': data.user.field_interested_countries || [],
 
           // ceci est utilisé pour mettre à jour les documents personnels du user
-          'http://dev.sdkgames.com/karryngo/rest/relation/user/user/user.field_documents': data.user.field_documents || [],
+          'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_documents': data.user.field_documents || [],
         }
       };
       this.api.patch(`user/${nid}?_format=hal_json`, JSON.stringify(this.params), headers).subscribe(success => {
