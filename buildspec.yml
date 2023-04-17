@@ -3,14 +3,14 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 14.x
+      nodejs: 16.x
     commands:
       - echo install process started
       - npm install && npm install -g @angular/cli
   build:
     commands:
       - echo build process started now
-      - ng build --configuration=production
+      - ng build --configuration=$ENV_MODE
   post_build:
     commands:
       - echo build process finished, we should uplload to S3 now
