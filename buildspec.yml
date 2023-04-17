@@ -9,9 +9,9 @@ phases:
     commands:
       - echo build process started now
       - ng build --configuration=$ENV_MODE
-  artifacts:
-    files:
-      - "**/*"
-    discard-paths: no
-    base-directory: dist/$APP_NAME
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: dist/$APP_NAME
     
