@@ -5,7 +5,7 @@ phases:
     
     commands:
       - echo install process started
-      - npm install -f
+      - npm install -f && npm install -g @angular/cli
   build:
     commands:
       - echo build process started now
