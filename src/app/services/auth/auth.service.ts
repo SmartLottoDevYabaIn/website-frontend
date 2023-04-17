@@ -167,7 +167,7 @@ export class AuthService {
    *  Create an account
    *
    */
-  createAccount(user: User): Promise<any> {
+  createAccount(user: any): Promise<any> {
 
     return new Promise((resolve, reject) => {
 
@@ -182,7 +182,7 @@ export class AuthService {
         'lastName': user.field_lastName,
         'password': user.field_password,
         'email': user.field_email,
-        'profilePicture': 'https://yaba-in.com/' + user.field_profilPicture,
+        'profilePicture': 'http://drive.google.com/uc?id=11TtmwsTdlQk2A4x3pn7FMmGKAkXbQdwI',
         'country': user.field_country,
         // 'location': user.field_location,
         'location': user.field_location,
@@ -241,7 +241,7 @@ export class AuthService {
   }
 
   // Login into your account
-  authLogin(userIdentifiants: User): Promise<any> {
+  authLogin(userIdentifiants: any): Promise<any> {
     let email = userIdentifiants.field_email;
     let password = userIdentifiants.field_password;
 

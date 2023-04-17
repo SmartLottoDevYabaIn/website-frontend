@@ -135,40 +135,41 @@ getUserInformations() {
   parseDataFromApi(userApiData:Record<string | number,any>):User
   {
     let user:User=new User();
-    user.field_id= userApiData._id;
-    user.field_firstName= userApiData.firstname;
-    user.field_lastName= userApiData.lastname;
-    user.field_email= userApiData.adresse.email;
-    user.field_city= userApiData.localtions;
-    user.field_country= userApiData.adresse.coutry;
-    user.field_password= userApiData.password;
-    user.field_contact= userApiData.adresse.mobilePhone;
-    user.field_whatsappContact= userApiData.adresse.whatsAppNumber;
-    // user.field_image=[];
-    user.field_phone= userApiData.adresse.phone;
-    user.field_skype= userApiData.adresse.skypeNumber;
-    user.field_websiteLink= userApiData.adresse.websiteLink;
+    user.id= userApiData._id;
+    user.name= userApiData.firstName + ' ' + userApiData.lastName;
+    user.email= userApiData.email;
+    user.phone= userApiData.phoneNumber;
+    user.img= userApiData.profilePicture;
+    user.amount_due= '000';
+    user.registered_on= userApiData.createdAt;
+    if(userApiData.isDisabled == false){
+      user.status= 'Inactive';
+    }else{
+      user.status= 'Active';
+    }
+    // user.img=[];
+    user.role= 'Customer';
     return user;
   }
 
-  parseDataToApi(user:User):Record<string|number,any>
-  {
-    return {
-      "_id": user.field_id,
-      "firstname": user.field_firstName,
-      "lastname": user.field_lastName,
-      "password": user.field_password,
-      "adresse": {
-        "email": user.field_email,
-        "mobilePhone": user.field_contact,
-        "phone": user.field_phone,
-        "websiteLink": user.field_websiteLink,
-        "whatsAppNumber": user.field_whatsappContact,
-        "skypeNumber": user.field_skype,
-        "country": user.field_country
-      }
-    }
-  }
+  // parseDataToApi(user:User):Record<string|number,any>
+  // {
+  //   return {
+  //     "_id": user.field_id,
+  //     "firstname": user.field_firstName,
+  //     "lastname": user.field_lastName,
+  //     "password": user.field_password,
+  //     "adresse": {
+  //       "email": user.field_email,
+  //       "mobilePhone": user.field_contact,
+  //       "phone": user.field_phone,
+  //       "websiteLink": user.field_websiteLink,
+  //       "whatsAppNumber": user.field_whatsappContact,
+  //       "skypeNumber": user.field_skype,
+  //       "country": user.field_country
+  //     }
+  //   }
+  // }
 
   // permet d'update les infos d'un user
   UpdateUser(nid: string, token: string, data: any): Promise<any> {
@@ -436,7 +437,7 @@ getUserInformations() {
   getUserById(id:String):Promise<any>
   {
     return new Promise<any>((resolve,reject)=>{
-      let user:User=this.listUser.find((u)=>u.field_id==id);
+      let user:User=this.listUser.find((u)=>u.id==id);
       if(user!=undefined) resolve(user);
       else{
         this.api.get(`user/profil/${id}`,{
@@ -502,16 +503,15 @@ getUserInformations() {
 
   // Get News to server
   getAllUsers(): Promise<any> {
+    console.log('Get all users.')
 
     return new Promise((resolve, reject) => {
       const headers = {
         'Content-Type': 'application/ld+json',
-        'Authorization': localStorage.getItem("access-token"),
+        'Authorization': 'Bearer ' + localStorage.getItem("access-token"),
       };
 
-      const body = {};
-
-      this.api.get('users', headers, body)
+      this.api.get('users', headers)
         .subscribe(data => {
           resolve(data);
           return 0;
