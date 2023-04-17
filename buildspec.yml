@@ -1,7 +1,5 @@
 version: 0.2
-env:
-  variables:
-    APP_NAME: "angular-cicd-pipeline-demo"
+
 phases:
   install:
     runtime-versions:
@@ -19,4 +17,3 @@ phases:
       - cd dist/$APP_NAME
       - ls -la
       - aws s3 sync . s3://$BUCKET_NAME --delete
-      
