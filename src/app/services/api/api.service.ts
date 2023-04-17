@@ -259,14 +259,14 @@ export class ApiService {
       }
       endpoint += '?' + req;
     }
-    console.log(this.url + '/' + endpoint, { 'headers': options });
-    return this.http.get(this.url + '/' + endpoint, { 'headers': options });
+    console.log(this.url + endpoint, { 'headers': options });
+    return this.http.get(this.url + endpoint, { 'headers': options });
   }
 
   // HTTP post
   post(endpoint: string, body: any, options?: any): Observable<any> {
-    console.log('user mail request: ', this.url + '/' + endpoint + '/', body, { 'headers': options });
-    return this.http.post(this.url + '/' + endpoint + '/', body, { 'headers': options });
+    console.log('user mail request: ', this.url + endpoint + '/', body, { 'headers': options });
+    return this.http.post(this.url + endpoint + '/', body, { 'headers': options });
   }
 
   // post1(endpoint: string, body: any, options?: any): Observable<any> {
