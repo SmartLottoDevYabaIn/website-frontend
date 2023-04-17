@@ -6,8 +6,16 @@ export class User {
   email: string;
   phone: string;
   img: string;
-  amount_due: string;
   registered_on: string;
   status: string;
-  role: string
+  emailConfirmed: boolean;
+  coverPicture: string;
+  country: string;
+  whatsapp: string;
+  skype: string;
+  websiteLink: string;
+  city: string;
+  authType: string;
+  role: [];
+  userSetting: [];
 }

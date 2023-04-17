@@ -140,15 +140,24 @@ getUserInformations() {
     user.email= userApiData.email;
     user.phone= userApiData.phoneNumber;
     user.img= userApiData.profilePicture;
-    user.amount_due= '000';
     user.registered_on= userApiData.createdAt;
+    user.emailConfirmed = userApiData.emailConfirmed;
+    user.coverPicture = userApiData.coverPicture;
+    user.country = userApiData.country;
+    user.whatsapp = userApiData.whatsapp;
+    user.skype = userApiData.skype;
+    user.websiteLink = userApiData.websiteLink;
+    user.city = userApiData.location;
+    user.authType = userApiData.authType;
+    // user.role.length = 1;
+    user.role = userApiData.role;
+    user.userSetting = userApiData.userSetting;
     if(userApiData.isDisabled == false){
-      user.status= 'Inactive';
-    }else{
       user.status= 'Active';
-    }
-    // user.img=[];
-    user.role= 'Customer';
+    }else{
+      user.status= 'Inactive';
+    };
+
     return user;
   }
 
@@ -504,7 +513,6 @@ getUserInformations() {
   // Get News to server
   getAllUsers(): Promise<any> {
     console.log('Get all users.')
-
     return new Promise((resolve, reject) => {
       const headers = {
         'Content-Type': 'application/ld+json',
@@ -512,12 +520,20 @@ getUserInformations() {
       };
 
       this.api.get('users', headers)
-        .subscribe(data => {
-          resolve(data);
+        .subscribe(result => {
+          console.log("users-- -refresh: ", result);
+          let tab: any = result.data;
+          // console.log("users-- -refresh: ", result.data);
+          for (let i = 0; i < tab.length; i++) {
+            tab[i] = this.parseDataFromApi(tab[i]);
+            console.log('user ', i, ': ', tab[i]);
+          }
+          localStorage.setItem("users-list", JSON.stringify(tab));
+          resolve(result);
           return 0;
 
         }), (error: any) =>  {
-          this.toastr.error('Can t get news', 'Error', {timeOut: 5000});
+          this.toastr.error("Can't get users", 'Error', {timeOut: 5000});
           console.log(error);
           reject(error);
         };

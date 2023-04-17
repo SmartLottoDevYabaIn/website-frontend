@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AllModulesService } from 'src/app/services/all-modules.service';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -17,19 +18,37 @@ export class CustomerListComponent implements OnInit {
 
   constructor(
     private srvModuleService: AllModulesService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.scrollToTop();
-    this.getCustomers();
+    this.customers = localStorage.getItem('users-list');
 
-    if (this.usersList) {
+    if (this.customers) {
+      this.customers = JSON.parse(localStorage.getItem('users-list'));
       this.wating = false;
     } else {
-      setTimeout(() => {
+      this.userService.getAllUsers()
+      .then((result) => {
+        this.customers = JSON.parse(localStorage.getItem('users-list'));
+        this.wating = true;
+          setTimeout(() => {
+            this.wating = false;
+          }, 3000);
+      })
+      .catch((error) => {
+        console.error('Erreur: ', error.message);
+        this.toastr.error(error.message, 'Error', { timeOut: 10000 });
         this.wating = false;
-      }, 3000);
+      });
     }
+    // else {
+    //   setTimeout(() => {
+    //     this.wating = false;
+    //   }, 3000);
+    // }
+
   }
 
   scrollToTop(): void {
@@ -38,25 +57,19 @@ export class CustomerListComponent implements OnInit {
 
   refreshList(){
     this.wating = true;
-    setTimeout(() => {
-      console.log(' in else');
-      this.userService.getAllUsers()
-        .then((result) => {
-          let tab: any = result.data;
-          for (let i = 0; i < result.data.length; i++) {
-            tab[i] = this.userService.parseDataFromApi(tab[i]);
-            console.log('user ', i, ': ', tab[i])
-          }
-          localStorage.setItem("users-list", JSON.stringify(tab))
-          this.customers = tab;
-          // console.log('Liste des users: ', this.customers)
-          // this.waitingData0 = true;
-        })
-        .catch((error) => {
-          console.error('Erreur: ', error.message);
-        });
+    this.userService.getAllUsers()
+    .then((result) => {
+      this.customers = JSON.parse(localStorage.getItem('users-list'));
+      this.wating = true;
+        setTimeout(() => {
+          this.wating = false;
+        }, 3000);
+    })
+    .catch((error) => {
+      console.error('Erreur: ', error.message);
+      this.toastr.error(error.message, 'Error', { timeOut: 10000 });
       this.wating = false;
-    }, 3000);
+    });
   }
 
   getCustomers() {
@@ -66,10 +79,9 @@ export class CustomerListComponent implements OnInit {
     //     this.customers = res;
     //   },
     // );
-    this.usersList = localStorage.getItem('users-list');
     if (this.usersList) {
       this.customers = JSON.parse(localStorage.getItem('users-list'));
-      console.log(this.customers);
+      console.log('users here also: ', this.customers);
     } else {
       this.refreshList();
 
