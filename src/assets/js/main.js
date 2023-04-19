@@ -120,8 +120,8 @@
             }
 
             if(scroll > footerOffset) {
-                backToTopBtn.addClass('foot-on-bottom');
-                $('.footer').find('.footer-bottom').find('.back-to-top-btn').find('a').addClass('active-plus');
+                // backToTopBtn.addClass('foot-on-bottom');
+                // $('.footer').find('.footer-bottom').find('.back-to-top-btn').find('a').addClass('active-plus');
             } else {
                 backToTopBtn.removeClass('foot-on-bottom');
                 $('.footer').find('.footer-bottom').find('.back-to-top-btn').find('a').removeClass('active-plus');

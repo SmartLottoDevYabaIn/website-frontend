@@ -103,7 +103,7 @@
         "lastName": "Prénom",
         "email": "Email",
         "password": "Mot de passe",
-        "emailAdress": "Adresse email",
+        "emailAddress": "Adresse email",
         "contact": "Contact",
         "zip": "Boîte postale",
         "location": "Ville",

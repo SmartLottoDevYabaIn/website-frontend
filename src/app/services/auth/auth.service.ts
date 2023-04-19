@@ -182,7 +182,7 @@ export class AuthService {
         'lastName': user.field_lastName,
         'password': user.field_password,
         'email': user.field_email,
-        'profilePicture': 'http://drive.google.com/uc?id=11TtmwsTdlQk2A4x3pn7FMmGKAkXbQdwI',
+        'profilePicture': 'https://drive.google.com/uc?id=11TtmwsTdlQk2A4x3pn7FMmGKAkXbQdwI',
         'country': user.field_country,
         // 'location': user.field_location,
         'location': user.field_location,

@@ -123,7 +123,6 @@ export class ApiService {
 
   // Get the app token
   getAppToken() {
-
     this.http.get(`${this.url}/rest/session/token`).subscribe(success => {
       localStorage.setItem('app-token', JSON.stringify(success));
     }, error => {
@@ -280,7 +279,7 @@ export class ApiService {
   // HTTP put
 
   put(endpoint: string, body: any, options?: any): Observable<any> {
-    return this.http.put(this.url + '/' + endpoint + '/', body, { 'headers': options });
+    return this.http.put(this.url + endpoint + '/', body, { 'headers': options });
   }
 
   // put(endpoint: string, body: any, options?: any): Observable<any> {

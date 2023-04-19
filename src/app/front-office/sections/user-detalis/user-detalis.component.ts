@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { User } from 'src/app/services/entities/user';
 import { TranslationService } from 'src/app/services/translation/language.service';
 import { UserService } from 'src/app/services/user/user.service';
-declare var $: any;
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css'],
+  selector: 'app-user-detalis',
+  templateUrl: './user-detalis.component.html',
+  styleUrls: ['./user-detalis.component.css'],
 })
-export class SettingsComponent implements OnInit {
-  userData: any;
+export class UserDetalisComponent implements OnInit {
+  @Input() userData: User;
+  @Input() isAdmin: boolean = false;
+  @Input() isEditable: boolean = false;
+
   creationDate: string;
   creationTime: string;
   constructor(
@@ -18,7 +22,7 @@ export class SettingsComponent implements OnInit {
     private translate: TranslateService,
     private translationService: TranslationService
     ) {
-    this.userData = this.userService.getLocalStorageUser();
+    // this.userData = this.userService.getLocalStorageUser();
     console.log(this.userData)
     const words = this.userData.registered_on.split('T');
     this.creationDate = words[0];
@@ -33,9 +37,9 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this.scrollToTop();
     this.userData = this.userService.getLocalStorageUser();
-    // Pricing Options Show
     this.translate.use(this.translationService.getLanguage());
-
+    
+    // Pricing Options Show
     $('#pricing_select input[name="rating_option"]').on('click', function (this:any) {
       if ($(this).val() == 'price_free') {
         $('#custom_price_cont').hide();
@@ -47,7 +51,6 @@ export class SettingsComponent implements OnInit {
     });
 
     // Education Add More
-
     $('.education-info').on('click', '.trash', function (this:any) {
       $(this).closest('.education-cont').remove();
       return false;

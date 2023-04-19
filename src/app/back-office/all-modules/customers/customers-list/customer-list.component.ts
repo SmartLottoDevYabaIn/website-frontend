@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { AllModulesService } from 'src/app/services/all-modules.service';
+import { TranslationService } from 'src/app/services/translation/language.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -15,14 +17,20 @@ export class CustomerListComponent implements OnInit {
   url: any = 'customers';
   wating = true;
   usersList: any;
+  userData?: any = '';
+  creationDate: string;
+  creationTime: string;
 
   constructor(
+    private translate: TranslateService,
+    private translationService: TranslationService,
     private srvModuleService: AllModulesService,
     private userService: UserService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.scrollToTop();
+    this.translate.use(this.translationService.getLanguage());
     this.customers = localStorage.getItem('users-list');
 
     if (this.customers) {
@@ -54,6 +62,12 @@ export class CustomerListComponent implements OnInit {
   scrollToTop(): void {
     window.scrollTo(0, 0);
   }
+
+  splitTime(userDateReg:any){
+    const words = userDateReg.split('T');
+    this.creationDate = words[0];
+    const other = words[1].split('.');
+    this.creationTime = other[0];}
 
   refreshList(){
     this.wating = true;

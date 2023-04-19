@@ -101,7 +101,6 @@
     "cityRequired": "Your city is required.",
     "playLotto": "Play lotto",
     "seeMore": "Explore more",
-    "contactUs": "Contact us",
     "ifQuery": "If you have any query about lottery or anything!",
     "home": "Home",
     "french": "French",
@@ -125,8 +124,9 @@
         "lastName": "Last Name",
         "email": "Email",
         "contact": "Contact",
+        "phone": "Phone",
         "password": "Password",
-        "emailAdress": "Email adresse",
+        "emailAddress": "Email adresse",
         "zip": "ZIP code",
         "location": "City",
         "country": "Country",
@@ -166,10 +166,10 @@
         "checkNumbContent": "If you are a winner, claim your prize: be sure to visit a retailer before your prize expires in 12 months."
     },
     "footer": {
-        "footerContent": "Lottery players can play French Lottery games online from anywhere in France on a phone, tablet or computer.",
         "copyright": "Copyright 2023 SmartestLotto. All rights reserved.",
         "policy": "Policy",
         "privacy": "Privacy",
+        "poweredBy": "Powered by",
         "terms": "Terms",
         "content": "Lottery players can play French Lottery games online from anywhere in France on a phone, tablet or computer."
     },
@@ -224,6 +224,20 @@
         "answerAsap": "We’ll answer it ASAP by mailing.",
         "yourEmail": "Your mail address here",
         "yourQuestion": "Write your question here...",
-        "submit": "Submit"
+        "submit": "Submit",
+        "askQ": "Search a question..."
+    },
+    "suscription": {
+        "title": "GET OUR NEWSLETTER",
+        "subTitle": "Stay tuned with us",
+        "content1": "Subscribe to SMARTESTLOTTO's newsletter and never miss our latest business newses.",
+        "content2": "We will regularly send you our news",
+        "subcribe": "Subcribe",
+        "mailEx": "youraddress@domain.com"
+    },
+    "contactUs": {
+        "title": "Contact us",
+        "subTitle": "Get in touch by simply dropping a message",
+        "sendMsg": "Send us your message"
     }
 }

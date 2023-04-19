@@ -101,7 +101,6 @@
     "cityRequired": "Votre ville est requis.",
     "seeMore": "Découvrir",
     "playLotto": "Commencer",
-    "contactUs": "Contactez-nous",
     "ifQuery": "Si vous avez des questions à propos de la loterie ou de quoi que ce soit d'autre!",
     "home": "Acceuil",
     "french": "Français",
@@ -125,8 +124,9 @@
         "lastName": "Prénom",
         "email": "Email",
         "password": "Mot de passe",
-        "emailAdress": "Adresse email",
+        "emailAddress": "Adresse email",
         "contact": "Contact",
+        "phone": "Téléphone",
         "zip": "Boîte postale",
         "location": "Ville",
         "country": "Pays",
@@ -167,11 +167,11 @@
         "checkNumbContent": "Si vous êtes gagnant, réclamez votre prix : assurez-vous de vous rendre chez un détaillant avant que votre prix n'expire dans 12 mois."
     },
     "footer": {
-        "footerContent": "Lottery players can play French Lottery games online from anywhere in France on a phone, tablet or computer.",
-        "copyright": "Copyright 2023 SmartestLotto. Tous droits réservés.",
+        "copyright": "2023 SmartestLotto. Tous droits réservés.",
         "policy": "Politiques",
         "privacy": "Confidentialité",
         "terms": "Terms",
+        "poweredBy": "Réalisé par",
         "content": "Les joueurs de loterie peuvent jouer aux jeux de la Loterie française en ligne depuis n'importe quel endroit en France sur un téléphone, une tablette ou un ordinateur."
     },
     "aboutUs": {
@@ -205,17 +205,17 @@
         "noteContent": "Le problème de la compensation des harmoniques, a été compris par les IAs. Des entrainements centaines de fois, jusqu'à ce qu'elles ont employées des probabilités sûr."
     },
     "blogPost": {
-        "title" : "articles de blog",
-        "subTitle" : "Les nouvelles de la loterie"
+        "title": "articles de blog",
+        "subTitle": "Les nouvelles de la loterie"
     },
     "lottoList": {
-        "title" : "Lotto",
-        "subTitle" : "Loteries disponibles",
+        "title": "Lotto",
+        "subTitle": "Loteries disponibles",
         "discover": "Découvrir"
     },
     "authority": {
-        "title" : "Notre staf",
-        "subTitle" : "une équipe passionnée de loto"
+        "title": "Notre staf",
+        "subTitle": "une équipe passionnée de loto"
     },
     "faq": {
         "faq": "QFP",
@@ -225,6 +225,21 @@
         "answerAsap": "Nous y répondrons le plus rapidement possible.",
         "yourEmail": "Votre Email ici",
         "yourQuestion": "Rédigez votre question ici...",
-        "submit": "Soumettre"
+        "submit": "Soumettre",
+        "askQ": "Rechercher une question..."
+    },
+    "suscription": {
+        "title": "BOÎTE AUX LETTRES",
+        "subTitle": "Restez informé",
+        "content1": "Inscrivez-vous à notre lettre boîte aux lettres et ne manquez jamais nos dernières actualités commerciales.",
+        "content2": "Nous vous enverrons régulièrement nos actualités.",
+        "subcribe": "Souscrire",
+        "mailEx": "votreaddresse@domain.com"
+    },
+    "contactUs": {
+        "title": "Contactez-nous",
+        "subTitle": "Nous sommes à votre écoute",
+        "sendMsg": "Envoyez votre message"
+
     }
 }

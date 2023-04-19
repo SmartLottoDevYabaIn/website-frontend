@@ -35,6 +35,7 @@ export class UserService {
 */
   setUserInformations(user: any) {
     this.currentUser = user;
+    user = this.parseDataFromApi(user);
     localStorage.setItem('user-data', JSON.stringify(user));
     
     //this.login.isLoggedIn = true;
@@ -137,6 +138,8 @@ getUserInformations() {
     let user:User=new User();
     user.id= userApiData._id;
     user.name= userApiData.firstName + ' ' + userApiData.lastName;
+    user.firstName= userApiData.firstName;
+    user.lastName= userApiData.lastName;
     user.email= userApiData.email;
     user.phone= userApiData.phoneNumber;
     user.img= userApiData.profilePicture;
@@ -157,6 +160,9 @@ getUserInformations() {
     }else{
       user.status= 'Inactive';
     };
+
+    user.address = userApiData.address;
+    user.bio = userApiData.bio;
 
     return user;
   }

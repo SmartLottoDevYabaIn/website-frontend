@@ -13,15 +13,14 @@
             <div class="col-xl-6 col-lg-6 col-md-9 col-sm-10 d-xl-flex d-lg-flex d-block align-items-center">
                 <div class="part-newsletter">
                     <div class="section-title">
-                        <h3 class="sub-title">get our newsletter</h3>
-                        <h2 class="title">Stay tuned with us</h2>
+                        <h3 class="sub-title">{{ 'suscription.title' | translate }}</h3>
+                        <h2 class="title">{{ 'suscription.subTitle' | translate }}</h2>
                     </div>
-                    <p>Subscribe to <span class="p-bold">SmartestLotto</span>‘s newsletter and never miss
-                        our latest business newses. <br />
-                        Our newsletter is sent once a week, every monday.</p>
+                    <p>{{ 'suscription.content1' | translate }}<br />
+                        {{ 'suscription.content2' | translate }}</p>
                     <form>
-                        <input type="text" placeholder="Ex: yourmail@address">
-                        <button class="btn-pok submit-btn">Subscribe <i class="fa-solid fa-rocket"></i></button>
+                        <input type="text" placeholder="Ex: {{ 'suscription.mailEx' | translate }}">
+                        <button class="btn-pok submit-btn">{{ 'suscription.subcribe' | translate }} <i class="fa-solid fa-rocket"></i></button>
                     </form>
                 </div>
             </div>
