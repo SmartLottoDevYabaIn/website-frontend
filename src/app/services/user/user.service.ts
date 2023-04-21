@@ -15,10 +15,10 @@ export class UserService {
 
   public currentUser: User = new User();
 
-  currentUserSubject:Subject<User> = new Subject<User>();
+  currentUserSubject: Subject<User> = new Subject<User>();
   public static isUser = true;
 
-  listUser:User[]=[];
+  listUser: User[] = [];
 
   params: any;
   userData: any;
@@ -37,45 +37,44 @@ export class UserService {
     this.currentUser = user;
     user = this.parseDataFromApi(user);
     localStorage.setItem('user-data', JSON.stringify(user));
-    
+
     //this.login.isLoggedIn = true;
   }
 
 
-  emitUserData()
-  {
+  emitUserData() {
     this.currentUserSubject.next(this.userData);
   }
   /*  
  *  get the user informations.
  */
-getUserInformations() {
-  console.log(JSON.parse(localStorage.getItem('user-data')));
-  // tslint:disable-next-line:prefer-const
-  const data: any = {
-  // console.log(JSON.parse(localStorage.getItem('user-data')).result._id);
-  field_id: JSON.parse(localStorage.getItem('user-data'))._id,
-  field_adility: JSON.parse(localStorage.getItem('user-data')).adility,
-  field_accountType: JSON.parse(localStorage.getItem('user-data')).accountType,
-  field_address: JSON.parse(localStorage.getItem('user-data')).address,
-  field_email : JSON.parse(localStorage.getItem('user-data')).adresse.email,
-  field_language : JSON.parse(localStorage.getItem('user-data')).adresse.language,
-  field_country : JSON.parse(localStorage.getItem('user-data')).adresse.country,
-  field_city : JSON.parse(localStorage.getItem('user-data')).adresse.city,
-  field_mobilePhone : JSON.parse(localStorage.getItem('user-data')).adresse.mobilePhone,
-  field_phone : JSON.parse(localStorage.getItem('user-data')).adresse.phone,
-  field_firstname : JSON.parse(localStorage.getItem('user-data')).firstname,
-  field_lastname : JSON.parse(localStorage.getItem('user-data')).lastname,
-  field_zip : JSON.parse(localStorage.getItem('user-data')).adresse.zip,
-  field_contact : JSON.parse(localStorage.getItem('user-data')).contact,
-  field_whatsappContact : JSON.parse(localStorage.getItem('user-data')).whatsappContact,
-  field_image : JSON.parse(localStorage.getItem('user-data')).image,
-  field_skype : JSON.parse(localStorage.getItem('user-data')).skype,
-  field_websiteLink : JSON.parse(localStorage.getItem('user-data')).websiteLink,
-};
-  // console.log(data);
-  return data;
-}
+  getUserInformations() {
+    console.log(JSON.parse(localStorage.getItem('user-data')));
+    // tslint:disable-next-line:prefer-const
+    const data: any = {
+      // console.log(JSON.parse(localStorage.getItem('user-data')).result._id);
+      field_id: JSON.parse(localStorage.getItem('user-data'))._id,
+      field_adility: JSON.parse(localStorage.getItem('user-data')).adility,
+      field_accountType: JSON.parse(localStorage.getItem('user-data')).accountType,
+      field_address: JSON.parse(localStorage.getItem('user-data')).address,
+      field_email: JSON.parse(localStorage.getItem('user-data')).adresse.email,
+      field_language: JSON.parse(localStorage.getItem('user-data')).adresse.language,
+      field_country: JSON.parse(localStorage.getItem('user-data')).adresse.country,
+      field_city: JSON.parse(localStorage.getItem('user-data')).adresse.city,
+      field_mobilePhone: JSON.parse(localStorage.getItem('user-data')).adresse.mobilePhone,
+      field_phone: JSON.parse(localStorage.getItem('user-data')).adresse.phone,
+      field_firstname: JSON.parse(localStorage.getItem('user-data')).firstname,
+      field_lastname: JSON.parse(localStorage.getItem('user-data')).lastname,
+      field_zip: JSON.parse(localStorage.getItem('user-data')).adresse.zip,
+      field_contact: JSON.parse(localStorage.getItem('user-data')).contact,
+      field_whatsappContact: JSON.parse(localStorage.getItem('user-data')).whatsappContact,
+      field_image: JSON.parse(localStorage.getItem('user-data')).image,
+      field_skype: JSON.parse(localStorage.getItem('user-data')).skype,
+      field_websiteLink: JSON.parse(localStorage.getItem('user-data')).websiteLink,
+    };
+    // console.log(data);
+    return data;
+  }
 
 
   /*
@@ -106,44 +105,43 @@ getUserInformations() {
       };
 
       this.api.get('requester/profil', headers)
-      .subscribe((response: any) => {
-        if (response) {
-          // let userData: any[];
-          // userData['user.field_email'] = response.result.email;
-          // userData['user.field_country'] = response.result.address.contray;
-          // userData['user.field_phone'] = response.result.address.mobilePhone;
-          // userData['user.field_id'] = response.result._id;
-          // userData['user.field_firstName'] = response.result.firstname;
-          // userData['user.field_lastName'] = response.result.lastname;
+        .subscribe((response: any) => {
+          if (response) {
+            // let userData: any[];
+            // userData['user.field_email'] = response.result.email;
+            // userData['user.field_country'] = response.result.address.contray;
+            // userData['user.field_phone'] = response.result.address.mobilePhone;
+            // userData['user.field_id'] = response.result._id;
+            // userData['user.field_firstName'] = response.result.firstname;
+            // userData['user.field_lastName'] = response.result.lastname;
 
-          resolve(response);
-          this.userData = response.result;
-          this.emitUserData();
-          this.setUserInformations(response);
-        }
+            resolve(response);
+            this.userData = response.result;
+            this.emitUserData();
+            this.setUserInformations(response);
+          }
 
-      }, (error: any) => {
+        }, (error: any) => {
 
-        if (error) {
-          console.log(error);
-          this.toastr.error(error.message, 'Error', {timeOut: 7000});
-          reject(error);
-        }
-      });
+          if (error) {
+            console.log(error);
+            this.toastr.error(error.message, 'Error', { timeOut: 7000 });
+            reject(error);
+          }
+        });
     });
   }
 
-  parseDataFromApi(userApiData:Record<string | number,any>):User
-  {
-    let user:User=new User();
-    user.id= userApiData._id;
-    user.name= userApiData.firstName + ' ' + userApiData.lastName;
-    user.firstName= userApiData.firstName;
-    user.lastName= userApiData.lastName;
-    user.email= userApiData.email;
-    user.phone= userApiData.phoneNumber;
-    user.img= userApiData.profilePicture;
-    user.registered_on= userApiData.createdAt;
+  parseDataFromApi(userApiData: Record<string | number, any>): User {
+    let user: User = new User();
+    user.id = userApiData._id;
+    user.name = userApiData.firstName + ' ' + userApiData.lastName;
+    user.firstName = userApiData.firstName;
+    user.lastName = userApiData.lastName;
+    user.email = userApiData.email;
+    user.phone = userApiData.phoneNumber;
+    user.img = userApiData.profilePicture;
+    user.registered_on = userApiData.createdAt;
     user.emailConfirmed = userApiData.emailConfirmed;
     user.coverPicture = userApiData.coverPicture;
     user.country = userApiData.country;
@@ -155,10 +153,10 @@ getUserInformations() {
     // user.role.length = 1;
     user.role = userApiData.role;
     user.userSetting = userApiData.userSetting;
-    if(userApiData.isDisabled == false){
-      user.status= 'Active';
-    }else{
-      user.status= 'Inactive';
+    if (userApiData.isDisabled == false) {
+      user.status = 'Active';
+    } else {
+      user.status = 'Inactive';
     };
 
     user.address = userApiData.address;
@@ -449,21 +447,18 @@ getUserInformations() {
   }
 
   //recuperer les informations d'un utilisateur
-  getUserById(id:String):Promise<any>
-  {
-    return new Promise<any>((resolve,reject)=>{
-      let user:User=this.listUser.find((u)=>u.id==id);
-      if(user!=undefined) resolve(user);
-      else{
-        this.api.get(`user/profil/${id}`,{
+  getUserById(id: String): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      let user: User = this.listUser.find((u) => u.id == id);
+      if (user != undefined) resolve(user);
+      else {
+        this.api.get(`user/profil/${id}`, {
           'Authorization': 'Bearer ' + this.api.getAccessToken(),
 
         }).subscribe(success => {
-          if(success)
-          {
+          if (success) {
             // console.log("Success ",success)
-            if(success.resultCode==0)
-            {
+            if (success.resultCode == 0) {
               resolve(this.parseDataFromApi(success.result));
             }
             else reject(success)
@@ -507,7 +502,7 @@ getUserInformations() {
           resolve(data);
           return 0;
 
-        }), (error: any) =>  {
+        }), (error: any) => {
           this.toastr.error('Can t get news', '500 Error');
           console.log(error);
           reject(error);
@@ -538,11 +533,71 @@ getUserInformations() {
           resolve(result);
           return 0;
 
-        }), (error: any) =>  {
-          this.toastr.error("Can't get users", 'Error', {timeOut: 5000});
+        }), (error: any) => {
+          this.toastr.error("Can't get users", 'Error', { timeOut: 5000 });
           console.log(error);
           reject(error);
         };
     });
   }
+
+  changeStatus(userId, status): Promise<any> {
+    console.log('change status: ', userId, status)
+    
+    const headers = {
+      'Content-Type': 'application/ld+json',
+      'Authorization': 'Bearer ' + localStorage.getItem("access-token"),
+    };
+
+    const param = {
+      'userId': userId,
+      'status': status,
+    };
+
+    return new Promise((resolve, reject) => {
+      this.api.put('user/profil/status', param, headers)
+        .subscribe(response => {
+          console.log('change status Response: ', response)
+          setTimeout(() => {
+            this.toastr.success('Status changed !!', null, { timeOut: 5000 });
+          }, 3000);
+          resolve(response);
+        }, error => {
+          this.toastr.error("Can't change user status, try again later", 'Error', { timeOut: 7000 });
+          this.toastr.error(error.message, 'Error', { timeOut: 7000 });
+          reject(error);
+        });
+    });
+
+  }
+
+  deleteUser(userId): Promise<any> {
+    console.log('delete user: ', userId)
+    
+    const headers = {
+      'Content-Type': 'application/ld+json',
+      'Authorization': 'Bearer ' + localStorage.getItem("access-token"),
+    };
+
+    const param = {
+      'id': userId,
+    };
+
+    return new Promise((resolve, reject) => {
+      this.api.delete('user/profil/' + userId, headers)
+        .subscribe(response => {
+          console.log('User deleted: ', response)
+          setTimeout(() => {
+            this.toastr.success('User was deleted !!', null, { timeOut: 5000 });
+          }, 3000);
+          resolve(response);
+        }, error => {
+          this.toastr.error("Can't delete user, try again later", 'Error', { timeOut: 7000 });
+          this.toastr.error(error.message, 'Error', { timeOut: 7000 });
+          reject(error);
+        });
+    });
+
+  }
+
 }

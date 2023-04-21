@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsComponent } from './settings.component';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { HttpLoaderFactory } from 'src/app/app.module';
 
 @NgModule({
   declarations: [SettingsComponent],
@@ -11,7 +13,14 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     SettingsRoutingModule,
     RouterModule,
-    TranslateModule
+    TranslateModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+    })
   ]
 })
 export class SettingsModule { }

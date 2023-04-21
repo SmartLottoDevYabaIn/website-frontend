@@ -109,4 +109,36 @@ export class CustomerListComponent implements OnInit {
     });
   }
 
+  changeStatus(userId, userStatus){
+    this.userService.changeStatus(userId, userStatus)
+    .then((result) => {
+      this.wating = true;
+        setTimeout(() => {
+          this.refreshList();
+          this.wating = false;
+        }, 3000);
+    })
+    .catch((error) => {
+      console.error('Erreur: ', error.message);
+      this.toastr.error(error.message, 'Error', { timeOut: 10000 });
+      this.wating = false;
+    });
+  }
+
+  deleteUser(userId){
+    this.userService.deleteUser(userId)
+    .then((result) => {
+      this.wating = true;
+        setTimeout(() => {
+          this.refreshList();
+          this.wating = false;
+        }, 3000);
+    })
+    .catch((error) => {
+      console.error('Erreur: ', error.message);
+      this.toastr.error(error.message, 'Error', { timeOut: 10000 });
+      this.wating = false;
+    });
+  }
+
 }

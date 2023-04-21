@@ -62,6 +62,7 @@
     "send": "Send",
     "enterEmailForVerification": "Enter your email to receive an account reset link.",
     "mailVerification": "Email address verification",
+    "weWillSendRessetRequest": "or more security, we will send you an account reset email. Click on the reset button and then go to your mailbox to follow the password reset link.",
     "wait": "Please wait",
     "error": "Error",
     "succes": "Success",

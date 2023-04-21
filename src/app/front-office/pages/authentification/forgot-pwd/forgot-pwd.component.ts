@@ -84,6 +84,7 @@ export class ForgotPwdComponent implements OnInit {
       this.submitted = false;
       this.waitingResponse = false;
       this.sended = true;
+      this.router.navigateByUrl('/login');
     })
     .catch((error) => {
       console.error('Erreur: ', error.message);

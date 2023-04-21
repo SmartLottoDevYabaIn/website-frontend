@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { CommonServiceService } from 'src/app/services/common-service.service';
 import { TranslateService } from '@ngx-translate/core';
 import { TranslationService } from 'src/app/services/translation/language.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sidemenu',
@@ -30,6 +31,7 @@ export class SidemenuComponent implements OnInit {
     public commonService: CommonServiceService,
     private authService: AuthService,
     private translate: TranslateService,
+    private toastr: ToastrService,
     private translationService: TranslationService
   ) {
     router.events.subscribe((event: Event) => {
@@ -60,21 +62,24 @@ export class SidemenuComponent implements OnInit {
   logout() {
     this.submitted = true;
     this.waitingResponse = true;
-    setTimeout(() => {
-      this.authService.logOut();
-      this.submitted = false;
+    this.authService.logOut()
+    .then((result) => {
+        setTimeout(() => {
+          this.commonService.nextmessage('logout');
+          this.submitted = false;
+          this.waitingResponse = false;
+        }, 3000);
+    })
+    .catch((error) => {
+      console.error('Erreur: ', error.message);
+      this.toastr.error(error.message, 'Error', { timeOut: 10000 });
       this.waitingResponse = false;
-      this.commonService.nextmessage('logout');
-    }, 3000)
+    });
   }
+
 
   navigate(name: any) {
     this.name = name;
     this.commonService.nextmessage(name);
-  }
-
-  Logout() {
-    this.authService.logOut();
-
   }
 }

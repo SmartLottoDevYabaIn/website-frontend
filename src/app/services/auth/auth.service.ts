@@ -74,7 +74,6 @@ export class AuthService {
             console.log('Success00: ', response);
             setTimeout(() => {
               this.toastr.success('A password reset link has been sent to your email.', 'Success', { timeOut: 7000 });
-              this.router.navigateByUrl('/login');
               resolve(response);
               return 0;
             }, 3000);
@@ -84,7 +83,6 @@ export class AuthService {
           if (error.status == 500) {
             setTimeout(() => {
               this.toastr.error("Try again later please.", 'Server Error', { timeOut: 5000 });
-              this.router.navigateByUrl('/login');
             }, 3000);
           } else if (error.status == 400) {
             this.toastr.warning("Email address is not verified. Check your email-box and confirm your email", 'Warning', { timeOut: 7000 });
@@ -156,11 +154,27 @@ export class AuthService {
   /*
    * logOut function is used to sign out .
    */
-  logOut() {
-    localStorage.clear();
-    this.isLoggedIn = false;
-    this.toastr.success('Votre session a été déconnecté!', 'Success', { timeOut: 5000 });
-    this.router.navigate(["/login"]);
+  logOut(): Promise<any> {
+      return new Promise((resolve, reject) => {
+        const headers = {
+          'Content-Type': 'application/ld+json',
+          'Authorization': 'Bearer ' + localStorage.getItem("access-token"),
+        };
+  
+        // this.api.delete('user/auth/logout', headers)
+        //   .subscribe(result => {
+            localStorage.clear();
+            this.isLoggedIn = false;
+            this.toastr.success('Your session has been disconnected!', 'Success', { timeOut: 5000 });
+            this.router.navigate(["/login"]);
+          //   resolve(result);
+          // }), (error: any) =>  {
+          //   this.toastr.error("Can't disconnect to your session", 'Error', {timeOut: 5000});
+          //   console.log(error);
+          //   reject(error);
+          // };
+      });
+    
   }
 
   /**
@@ -275,7 +289,7 @@ export class AuthService {
           this.router.navigate(['home']);
           setTimeout(()=>{
             this.toastr.success('Welcome !!', null, { timeOut: 5000 });
-          }, 500);
+          }, 3000);
           resolve(response);
         }, error => {
           if (error.status == 500) {

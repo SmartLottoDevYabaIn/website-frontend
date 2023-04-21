@@ -294,9 +294,7 @@ export class ApiService {
   // HTTP delete
   delete(endpoint: string, options?: any): Observable<any> {
     const headers = options;
-    return this.http.delete(this.url + '/' + endpoint, {
-      headers
-    });
+    return this.http.delete(this.url + endpoint, { 'headers': options });
   }
 
   // HTTP pact

@@ -250,6 +250,7 @@ export class AllModulesComponent implements OnInit {
 	    }
 	});
   }
+  
   ngAfterViewInit() {
     Feather.replace();
 
