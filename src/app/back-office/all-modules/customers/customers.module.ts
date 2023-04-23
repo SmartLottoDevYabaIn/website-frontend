@@ -13,24 +13,26 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpLoaderFactory } from 'src/app/app.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { UserDetalisModule } from "../../../front-office/sections/user-detalis/user-detalis.module";
 @NgModule({
-  declarations: [ CustomersComponent,CustomerListComponent,AddCustomerComponent,EditCustomerComponent],
-  imports: [
-    CommonModule,
-    CustomersRoutingModule,
-     RouterModule,
-    ReactiveFormsModule,
-    FormsModule,
-    DataTablesModule,
-    ModalModule.forRoot(),
-    ProgressIndeterminateModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-      }
-    })
-  ],
+    declarations: [CustomersComponent, CustomerListComponent, AddCustomerComponent, EditCustomerComponent],
+    imports: [
+        CommonModule,
+        CustomersRoutingModule,
+        RouterModule,
+        ReactiveFormsModule,
+        FormsModule,
+        DataTablesModule,
+        ModalModule.forRoot(),
+        ProgressIndeterminateModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        UserDetalisModule
+    ]
 })
 export class CustomersModule {}

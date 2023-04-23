@@ -87,7 +87,7 @@
 }
 
 .dropdown-content a:hover {
-    background-color: #ddd;
+    background-color: #ddd !important;
 }
 
 .show {

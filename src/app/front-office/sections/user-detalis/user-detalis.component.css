@@ -16,3 +16,9 @@
 .an-tag .angular-tag-input__input {
     padding: 0 !important;
 }
+.back .card-body {
+    padding-top: 0rem !important;
+    padding-right: 5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 0rem !important;
+}

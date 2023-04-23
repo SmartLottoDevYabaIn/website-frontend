@@ -5,6 +5,7 @@ import { CustomerListRoutingModule } from './customer-list-routing.module';
 import { CustomerListComponent } from './customer-list.component';
 import { DataTablesModule } from "angular-datatables";
 import { TranslateModule } from '@ngx-translate/core';
+import { UserDetalisModule } from 'src/app/front-office/sections/user-detalis/user-detalis.module';
 
 @NgModule({
   declarations: [],
@@ -12,7 +13,8 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     CustomerListRoutingModule,ReactiveFormsModule,FormsModule,
     DataTablesModule,
-    TranslateModule
+    TranslateModule,
+    UserDetalisModule
   ]
 })
 export class CustomerListModule { }

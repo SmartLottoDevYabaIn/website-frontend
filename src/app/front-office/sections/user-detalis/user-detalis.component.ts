@@ -11,23 +11,18 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./user-detalis.component.css'],
 })
 export class UserDetalisComponent implements OnInit {
-  @Input() userData: User;
-  @Input() isAdmin: boolean = false;
-  @Input() isEditable: boolean = false;
+  @Input() userData: any;
+  @Input() isAdmin: boolean = true;
+  @Input() isEditable: boolean = true;
+  @Input() creationDate?: string;
+  @Input() creationTime?: string;
 
-  creationDate: string;
-  creationTime: string;
   constructor(
     private userService: UserService,
     private translate: TranslateService,
     private translationService: TranslationService
     ) {
-    // this.userData = this.userService.getLocalStorageUser();
-    console.log(this.userData)
-    const words = this.userData.registered_on.split('T');
-    this.creationDate = words[0];
-    const other = words[1].split('.');
-    this.creationTime = other[0];
+
   }
 
   scrollToTop(): void {
@@ -35,202 +30,10 @@ export class UserDetalisComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.scrollToTop();
-    this.userData = this.userService.getLocalStorageUser();
     this.translate.use(this.translationService.getLanguage());
     
-    // Pricing Options Show
-    $('#pricing_select input[name="rating_option"]').on('click', function (this:any) {
-      if ($(this).val() == 'price_free') {
-        $('#custom_price_cont').hide();
-      }
-      if ($(this).val() == 'custom_price') {
-        $('#custom_price_cont').show();
-      } else {
-      }
-    });
-
-    // Education Add More
-    $('.education-info').on('click', '.trash', function (this:any) {
-      $(this).closest('.education-cont').remove();
-      return false;
-    });
-
-    $('.add-education').on('click', function () {
-      var educationcontent =
-        '<div class="row form-row education-cont">' +
-        '<div class="col-12 col-md-10 col-lg-11">' +
-        '<div class="row form-row">' +
-        '<div class="col-12 col-md-6 col-lg-4">' +
-        '<div class="form-group">' +
-        '<label>Degree</label>' +
-        '<input type="text" class="form-control">' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-12 col-md-6 col-lg-4">' +
-        '<div class="form-group">' +
-        '<label>College/Institute</label>' +
-        '<input type="text" class="form-control">' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-12 col-md-6 col-lg-4">' +
-        '<div class="form-group">' +
-        '<label>Year of Completion</label>' +
-        '<input type="text" class="form-control">' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="javascript:void(0);" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>' +
-        '</div>';
-
-      $('.education-info').append(educationcontent);
-      return false;
-    });
-
-    // Experience Add More
-
-    $('.experience-info').on('click', '.trash', function (this:any) {
-      $(this).closest('.experience-cont').remove();
-      return false;
-    });
-
-    $('.add-experience').on('click', function () {
-      var experiencecontent =
-        '<div class="row form-row experience-cont">' +
-        '<div class="col-12 col-md-10 col-lg-11">' +
-        '<div class="row form-row">' +
-        '<div class="col-12 col-md-6 col-lg-4">' +
-        '<div class="form-group">' +
-        '<label>Hospital Name</label>' +
-        '<input type="text" class="form-control">' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-12 col-md-6 col-lg-4">' +
-        '<div class="form-group">' +
-        '<label>From</label>' +
-        '<input type="text" class="form-control">' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-12 col-md-6 col-lg-4">' +
-        '<div class="form-group">' +
-        '<label>To</label>' +
-        '<input type="text" class="form-control">' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-12 col-md-6 col-lg-4">' +
-        '<div class="form-group">' +
-        '<label>Designation</label>' +
-        '<input type="text" class="form-control">' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-12 col-md-2 col-lg-1"><label class="d-md-block d-sm-none d-none">&nbsp;</label><a href="javascript:void(0);" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a></div>' +
-        '</div>';
-
-      $('.experience-info').append(experiencecontent);
-      return false;
-    });
-
-    // Awards Add More
-
-    $('.awards-info').on('click', '.trash', function (this:any) {
-      $(this).closest('.awards-cont').remove();
-      return false;
-    });
-
-    $('.add-award').on('click', function () {
-      var regcontent =
-        '<div class="row form-row awards-cont">' +
-        '<div class="col-12 col-md-5">' +
-        '<div class="form-group">' +
-        '<label>Awards</label>' +
-        '<input type="text" class="form-control">' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-12 col-md-5">' +
-        '<div class="form-group">' +
-        '<label>Year</label>' +
-        '<input type="text" class="form-control">' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-12 col-md-2">' +
-        '<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
-        '<a href="javascript:void(0);" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
-        '</div>' +
-        '</div>';
-
-      $('.awards-info').append(regcontent);
-      return false;
-    });
-
-    // Membership Add More
-
-    $('.membership-info').on('click', '.trash', function (this:any) {
-      $(this).closest('.membership-cont').remove();
-      return false;
-    });
-
-    $('.add-membership').on('click', function () {
-      var membershipcontent =
-        '<div class="row form-row membership-cont">' +
-        '<div class="col-12 col-md-10 col-lg-5">' +
-        '<div class="form-group">' +
-        '<label>Memberships</label>' +
-        '<input type="text" class="form-control">' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-12 col-md-2 col-lg-2">' +
-        '<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
-        '<a href="javascript:void(0);" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
-        '</div>' +
-        '</div>';
-
-      $('.membership-info').append(membershipcontent);
-      return false;
-    });
-
-    // Registration Add More
-
-    $('.registrations-info').on('click', '.trash', function (this:any) {
-      $(this).closest('.reg-cont').remove();
-      return false;
-    });
-
-    $('.add-reg').on('click', function () {
-      var regcontent =
-        '<div class="row form-row reg-cont">' +
-        '<div class="col-12 col-md-5">' +
-        '<div class="form-group">' +
-        '<label>Registrations</label>' +
-        '<input type="text" class="form-control">' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-12 col-md-5">' +
-        '<div class="form-group">' +
-        '<label>Year</label>' +
-        '<input type="text" class="form-control">' +
-        '</div>' +
-        '</div>' +
-        '<div class="col-12 col-md-2">' +
-        '<label class="d-md-block d-sm-none d-none">&nbsp;</label>' +
-        '<a href="javascript:void(0);" class="btn btn-danger trash"><i class="far fa-trash-alt"></i></a>' +
-        '</div>' +
-        '</div>';
-
-      $('.registrations-info').append(regcontent);
-      return false;
-    });
-  }
-  files: File[] = [];
-
-  onSelect(event:any) {
-    this.files.push(...event.addedFiles);
-  }
-
-  onRemove(event:any) {
-    this.files.splice(this.files.indexOf(event), 1);
   }
 
 }

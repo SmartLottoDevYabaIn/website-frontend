@@ -34,9 +34,9 @@ export class NavigationComponent implements OnInit {
   
   navigateToHome() {
     this.router.navigate(['/front']);
-    setTimeout(()=>{
-      location.reload();
-    }, 10)
+    // setTimeout(()=>{
+    //   location.reload();
+    // }, 10)
   }
 
   navigateToBlog() {

@@ -161,18 +161,18 @@ export class AuthService {
           'Authorization': 'Bearer ' + localStorage.getItem("access-token"),
         };
   
-        // this.api.delete('user/auth/logout', headers)
-        //   .subscribe(result => {
+        this.api.delete('user/auth/logout', headers)
+          .subscribe(result => {
             localStorage.clear();
             this.isLoggedIn = false;
             this.toastr.success('Your session has been disconnected!', 'Success', { timeOut: 5000 });
             this.router.navigate(["/login"]);
-          //   resolve(result);
-          // }), (error: any) =>  {
-          //   this.toastr.error("Can't disconnect to your session", 'Error', {timeOut: 5000});
-          //   console.log(error);
-          //   reject(error);
-          // };
+            resolve(result);
+          }), (error: any) =>  {
+            this.toastr.error("Can't disconnect to your session", 'Error', {timeOut: 5000});
+            console.log(error);
+            reject(error);
+          };
       });
     
   }

@@ -222,6 +222,19 @@
     -webkit-transition: all 0.3s ease-in;
     transition: all 0.3s ease-in;
   }
+  .dropdown-toggle:after {
+    margin-left: 0;
+    vertical-align: 0;
+    content: "\f107";
+    border: none;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 14px;
+    margin-left: 3px;
+    position: relative;
+    -webkit-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+  }
 
   .header .main-menu .navbar .navbar-nav .nav-item.dropdown:hover .dropdown-toggle:after {
     -webkit-transform: rotate(180deg);
@@ -253,9 +266,29 @@
       margin-top: 0;
       overflow: hidden;
     }
+    .dropdown-menu {
+      -webkit-transition: max-height 0.4s, opacity 0.1s, visibility 0s, padding 0.2s ease;
+      transition: max-height 0.4s, opacity 0.1s, visibility 0s, padding 0.2s ease;
+      max-height: 0;
+      padding: 0;
+      margin-top: 0;
+      overflow: hidden;
+    }
   }
 
   .header .main-menu .navbar .navbar-nav .nav-item.dropdown .dropdown-menu li a.dropdown-item {
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.6px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    padding: 5px 30px 6px;
+    position: relative;
+    -webkit-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  a.dropdown-item {
     font-family: "Barlow Condensed", sans-serif;
     font-size: 18px;
     letter-spacing: 0.6px;
