@@ -28,10 +28,10 @@ export class ProfileComponent implements OnInit {
     private userService: UserService
   ){
     this.userData = this.userService.getLocalStorageUser();
-    const words = this.userData.createdAt.split('T');
-    this.creationDate = words[0];
-    const other = words[1].split('.');
-    this.creationTime = other[0];
+    // const words = this.userData.createdAt.split('T');
+    // this.creationDate = words[0];
+    // const other = words[1].split('.');
+    // this.creationTime = other[0];
 
     //this is to determine the text direction depending on the selected language
     translate.onLangChange.subscribe((event: LangChangeEvent) =>
@@ -45,6 +45,15 @@ export class ProfileComponent implements OnInit {
     this.scrollToTop();
     
     this.translate.use(this.translationService.getLanguage());
+    this.userService.getUserActivities(this.userData.id)
+    .then((result) => {
+      console.log("activities 000: ", result);
+      // this.aLaUne = result;
+      // this.waitingData0 = true;
+    })
+    .catch((error) => {
+      console.error('Erreur0000: ', error.message);
+    });
   }
 
   about() {

@@ -83,6 +83,7 @@ export class ApiService {
   //   });
   // }
 
+
   // Set the user access token.
   setAccessToken(token: string) {
     return localStorage.setItem('access-token', token);
@@ -246,6 +247,19 @@ export class ApiService {
   }
 
 
+  // HTTP get
+  get2(endpoint: string, options?: any, body?: Record<string, any>): Observable<any> {
+    // if (body) {
+    //   let req: String = '';
+    //   // tslint:disable-next-line:forin
+    //   for (const key in body) {
+    //     req += `${key}=${body[key]}&`;
+    //   }
+    //   endpoint += '?' + req;
+    // }
+    console.log(this.url + endpoint, { 'headers': options });
+    return this.http.get(this.url + endpoint, { 'headers': options });
+  }
 
 
   // HTTP get
@@ -277,7 +291,6 @@ export class ApiService {
   // }
 
   // HTTP put
-
   put(endpoint: string, body: any, options?: any): Observable<any> {
     return this.http.put(this.url + endpoint + '/', body, { 'headers': options });
   }
@@ -306,51 +319,6 @@ export class ApiService {
 
 
   // Drupal ends point
-
-  /**
-   *  Get a node
-   */
-  getaNode(resource: string, nid: string): Observable<any> {
-    const header = this.setHeaders(false, false, false, false, true);
-    return this.get(`api/v01/${resource}/${nid}?_format=hal_json`, header);
-  }
-
-
-  /**
-   *  Get all a node
-   */
-  getNodes(resource: string): Observable<any> {
-    const header = this.setHeaders(false, false, false, false, true);
-    return this.get(`api/v01/${resource}?_format=hal_json`, header);
-  }
-
-  /*
-  *  Add  a node
-  */
-  addNode(param: any): Observable<any> {
-    const header = this.setHeaders(false, false, false, false, true);
-    return this.post(`node?_format=hal_json`, JSON.stringify(param), header);
-  }
-
-  /*
-  *  Update  a node
-  */
-  updateNode(nid: string, param: any): Observable<any> {
-    const header = this.setHeaders(false, false, false, false, true);
-    return this.patch(`node/${nid}?_format=hal_json`, JSON.stringify(param), header);
-  }
-
-
-  /**
-   *  Update  a node
-   */
-  deleteNode(nid: string): Observable<any> {
-
-    const header = this.setHeaders(false, false, false, false, true);
-    return this.delete(`node/${nid}?_format=hal_json`, header);
-
-  }
-
 
   /**
    *  Refresh the access token
@@ -417,20 +385,6 @@ export class ApiService {
         break;
 
     }
-  }
-
-  // Get the node data
-  getNodeData(uuid: string, nodes: any) {
-
-    const nodedata = null;
-    if (nodes && nodes.length > 0) {
-      nodes.forEach((node: any) => {
-        if (node.uuid[0].value === uuid) {
-          return node;
-        }
-      });
-    }
-    return nodedata;
   }
 
   // generate random string with
@@ -622,10 +576,7 @@ export class ApiService {
     return data;
   }
 
-
-
-
-  // filte by day
+  // filter by day
   getfulldatefilter(data: any[], date: string) {
 
     const datesValid: any = [];

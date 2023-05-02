@@ -87,7 +87,8 @@ export class AuthService {
           } else if (error.status == 400) {
             this.toastr.warning("Email address is not verified. Check your email-box and confirm your email", 'Warning', { timeOut: 7000 });
           } else if (error.status == 401) {
-            this.toastr.error("Unknown email address", 'error', { timeOut: 5000 });
+            this.logOut();
+            this.toastr.error("Your session has been expire", 'error', { timeOut: 5000 });
           } else if (error.status == 403) {
             this.toastr.warning("The email has already been confirmed", 'Warning', { timeOut: 7000 });
           } else if (error.status == 404) {

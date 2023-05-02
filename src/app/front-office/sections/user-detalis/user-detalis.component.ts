@@ -17,6 +17,10 @@ export class UserDetalisComponent implements OnInit {
   @Input() creationDate?: string;
   @Input() creationTime?: string;
 
+  @Input() userLang?: any;
+  @Input() userTheme?: any;
+  @Input() isEnglishTimeFormat?: any;
+
   constructor(
     private userService: UserService,
     private translate: TranslateService,

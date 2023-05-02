@@ -41,7 +41,6 @@ export class UserService {
     //this.login.isLoggedIn = true;
   }
 
-
   emitUserData() {
     this.currentUserSubject.next(this.userData);
   }
@@ -76,6 +75,41 @@ export class UserService {
     return data;
   }
 
+  // Get user's activity
+  getUserActivities(userId: any, pageNumber?: number, itemsPerPage?: number): Promise<any> {
+    if (!pageNumber) {
+      pageNumber = 1;
+    }
+    if (!itemsPerPage) {
+      itemsPerPage = 10;
+    }
+
+    return new Promise((resolve, reject) => {
+      const headers = {
+        'Content-Type': 'application/ld+json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem("access-token"),
+      };
+
+      const param = {
+        // 'id': pageNumber,
+        'id': userId,
+        'page': pageNumber,
+        'limit': itemsPerPage,
+      };
+
+      this.api.get2(`user/history/${userId}/${pageNumber}/${itemsPerPage}`, headers, param)
+        .subscribe(data => {
+          resolve(data);
+          return 0;
+
+        }), (error: any) =>  {
+          this.toastr.error('Can t get activity', '500 Error', {timeOut: 5000});
+          console.log("00000", error);
+          reject(error);
+        };
+    });
+  }
 
   /*
   *  Get local user profile data.
@@ -185,12 +219,12 @@ export class UserService {
   // }
 
   // permet d'update les infos d'un user
-  UpdateUser(nid: string, token: string, data: any): Promise<any> {
+  updateUser(userData: any): Promise<any> {
 
     return new Promise((resolve, reject) => {
 
       const headers = {
-        'Authorization': 'Bearer ' + token,
+        'Authorization': 'Bearer ' + this.api.getAccessToken(),
         'Content-Type': 'application/hal+json',
         'Accept': 'application/json',
         'X-CSRF-Token': 'FWjJkOClVTMzyhEPEhz_OPR3PulweXUqi-NePcofKU8' || JSON.parse(localStorage.getItem('app-token'))
@@ -198,27 +232,18 @@ export class UserService {
 
       const cheminUrl = `${this.api.url}/rest/type/user/user`;
       this.params = {
-        '_links': {
-          'type': {
-            'href': cheminUrl
-          }
-        },
         // body
-        'user.field_firstname': [
-          {
-            'value': data.user.field_firstname
-          }
-        ],
+        '_id':  userData.id,
 
         'user.field_surname': [
           {
-            'value': data.user.field_surname
+            'value': userData.user.field_surname
           }
         ],
 
         'user.field_username': [
           {
-            'value': data.user.field_username
+            'value': userData.user.field_username
           }
         ],
 
@@ -231,130 +256,70 @@ export class UserService {
 
         'user.field_address': [
           {
-            'value': data.user.field_address
+            'value': userData.user.field_address
           }
         ],
 
         'user.field_mobile_phone_number': [
           {
-            'value': data.user.field_mobile_phone_number
+            'value': userData.user.field_mobile_phone_number
           }
         ],
 
         'user.field_phone_number': [
           {
-            'value': data.user.field_phone_number
+            'value': userData.user.field_phone_number
           }
         ],
 
         'user.field_whatsapp_number': [
           {
-            'value': data.user.field_whatsapp_number
+            'value': userData.user.field_whatsapp_number
           }
         ],
-        // Les 2 cas qui suivent sont utilisés pour enregistrer le pays du user en fonction de la langue choisie dans le système. N.B: 1 seul cas parmi les 2 est utilisé.
-
-        // Cas 1: ceci est utilisé pour enregistrer le pays du user avec choix de la langue English (uuid est obtenu à partir du numéro 12)
-        'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_country': [
-          {
-            '_links': {
-              'type': {
-                'href': 'https://api-dev.smartestlotto.io/karryngo/rest/type/taxonomy_term/countries'
-              }
-            },
-            'uuid': [
-              {
-                'value': data.country_uuid
-              }
-            ]
-          }
-        ],
-
-        '_embedded': {
-          // Ceci est utilisé s'il y a le ID du type (ID Card ou Passport ou ...) (représente le ID type (ID Card ou Passport) obtenu à partir du numéro 6)
-          'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_id_type': [
-            {
-              '_links': {
-                'type': {
-                  'href': 'https://api-dev.smartestlotto.io/karryngo/rest/type/taxonomy_term/id_type'
-                }
-              },
-              'uuid': [
-                {
-                  'value': data.user.field_id_type
-                }
-              ]
-            }
-          ],
-
-          // Ceci est utilisé pour lier l'image au profil du user. On utilise le numéro 7 pour save une image puis récupérer son uuid qu'on renseigne en bas
-          'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user_picture': [
-            {
-              '_links': {
-                'type': {
-                  'href': 'https://api-dev.smartestlotto.io/karryngo/rest/type/file/file'
-                }
-              },
-              'uuid': [
-                {
-                  'value': data.user_picture
-                }
-              ]
-
-            }
-          ],
-
-          // Cas 1: ceci est utilisé pour enregistrer le pays du user avec choix de la langue English (uuid est obtenu à partir du numéro 12)
-          'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_country': [
-            {
-              '_links': {
-                'type': {
-                  'href': 'https://api-dev.smartestlotto.io/karryngo/rest/type/taxonomy_term/countries'
-                }
-              },
-              'uuid': [
-                {
-                  'value': data.user.field_country
-                }
-              ]
-
-            }
-          ],
-          // Cas 2: ceci est utilisé pour enregistrer le pays du user avec choix de la langue Français (uuid est obtenu à partir du numéro 13)
-          /* 'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_pays': [
-            {
-              '_links': {
-                'type': {
-                  'href': 'https://api-dev.smartestlotto.io/karryngo/rest/type/taxonomy_term/pays'
-                }
-              },
-              'uuid': [
-                {
-                  'value': data.user.field_pays
-                }
-              ]
-
-            }
-          ], */
-
-          // Ceci est utilisé pour enregistrer les différentes langues choisies par le user (uuid est obtenu à partir du numéro 11).
-          'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_language': data.user.field_language || [],
-
-          // ceci est ajouté pour mettre à jour les différents types de service que le user offre (Services offered)
-          'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_choose_type_of_services': data.user.field_choose_type_of_services || [],
-
-          // ceci est utilisé pour mettre à jour le choix du pays avec ces villes
-          'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_interested_countries': data.user.field_interested_countries || [],
-
-          // ceci est utilisé pour mettre à jour les documents personnels du user
-          'https://api-dev.smartestlotto.io/karryngo/rest/relation/user/user/user.field_documents': data.user.field_documents || [],
-        }
       };
-      this.api.patch(`user/${nid}?_format=hal_json`, JSON.stringify(this.params), headers).subscribe(success => {
-        resolve(success);
-      }, error => {
-        reject(error);
-      });
+      
+
+      this.api.post(`user/profil/${userData.id}`, this.params, headers)
+        .subscribe((response: any) => {
+          if (response) {
+            if (response.statusCode === 201) {
+              // this.registResult = true;
+              // this.router.navigate(['login']);
+              this.toastr.success("Your account has been created. You will receive a confirmation email.", 'Success', { timeOut: 7000 });
+            }
+            resolve(response);
+            return 0;
+          }
+        }, (error: any) => {
+          if (error.status == 400) {
+            // this.registResult = false;
+            this.toastr.error("This email address is already used.", 'Error', { timeOut: 5000 });
+            // console.log('Error message: ', error.message);
+            reject(error);
+          } else if (error.status == 401) {
+            // this.registResult = false;
+            this.toastr.error("This email address is already used.", 'Error', { timeOut: 5000 });
+            // console.log('Error message: ', error.message);
+            reject(error);
+          } else if (error.status == 500) {
+            // this.registResult = false;
+            this.toastr.error('Intternal server error: ' + error.message, 'Error', { timeOut: 7000 });
+            // console.log('Error message: ', error.message);
+            reject(error);
+          }
+          else {
+            // this.registResult = false;
+            this.toastr.error(error.message, 'Unknown error', { timeOut: 7000 });
+            // console.log('Error message: ', error.message);
+            reject(error);
+          }
+        });
+      // this.api.patch(`user/${nid}?_format=hal_json`, JSON.stringify(this.params), headers).subscribe(success => {
+      //   resolve(success);
+      // }, error => {
+      //   reject(error);
+      // });
     });
   }
 
@@ -517,7 +482,7 @@ export class UserService {
     return new Promise((resolve, reject) => {
       const headers = {
         'Content-Type': 'application/ld+json',
-        'Authorization': 'Bearer ' + localStorage.getItem("access-token"),
+        'Authorization': 'Bearer ' + this.api.getAccessToken(),
       };
 
       this.api.get('users', headers)

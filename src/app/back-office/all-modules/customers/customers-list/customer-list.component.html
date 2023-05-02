@@ -105,7 +105,7 @@
                             : 'bg-success-light btn btn-sm btn-white'
                         " style="margin-right: 10px;">
                         <i class="fa fa-power-off"></i></a>
-                      <a class="btn btn-sm btn-white text-success me-2"><i class="far fa-edit me-1"></i></a>
+                      <a class="btn btn-sm btn-white text-success me-2" data-bs-toggle="modal" data-bs-target="#edit"><i class="far fa-edit me-1"></i></a>
                       <a (click)="tempId = customer.name" data-bs-toggle="modal" data-bs-target="#delete_customer"
                         class="btn btn-sm btn-white text-danger me-2"><i class="far fa-trash-alt me-1"></i></a>
                     </td>
@@ -188,6 +188,16 @@
           Delete
         </button>
       </div> -->
+    </div>
+  </div>
+</div>
+
+<div class="modal custom-modal fade" id="edit" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-user-detalis [userData]="userData" [isAdmin]="true" [isEditable]="true" [creationDate]="creationDate" [creationTime]="creationTime"></app-user-detalis>
+      </div>
     </div>
   </div>
 </div>
