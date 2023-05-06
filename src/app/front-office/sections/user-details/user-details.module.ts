@@ -4,15 +4,18 @@ import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from 'src/app/app.module';
-import { UserDetalisComponent } from './user-detalis.component';
+import { UserDetailsComponent } from './user-details.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    UserDetalisComponent
+    UserDetailsComponent
 ],
 imports: [
   CommonModule,
   RouterModule,
+  ReactiveFormsModule,
+  FormsModule,
   TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,
@@ -22,7 +25,7 @@ imports: [
   })
 ],
 exports: [
-  UserDetalisComponent
+  UserDetailsComponent
 ]
 })
-export class UserDetalisModule { }
+export class UserDetailsModule { }

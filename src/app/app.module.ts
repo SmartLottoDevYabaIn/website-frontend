@@ -121,7 +121,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     })
   ],
   providers: [
-    AllModulesService,
+    // AllModulesService,
     AuthenticationGuard,
     TranslationService],
   bootstrap: [AppComponent],

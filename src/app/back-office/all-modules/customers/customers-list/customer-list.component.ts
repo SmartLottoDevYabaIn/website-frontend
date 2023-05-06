@@ -47,7 +47,7 @@ export class CustomerListComponent implements OnInit {
       })
       .catch((error) => {
         console.error('Erreur: ', error.message);
-        this.toastr.error(error.message, 'Error', { timeOut: 10000 });
+        // this.toastr.error(error.message, 'Error', { timeOut: 10000 });
         this.wating = false;
       });
     }

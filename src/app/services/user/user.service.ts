@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { ApiService } from '../api/api.service';
-import { AuthService } from '../auth/auth.service';
+// import { AuthService } from '../auth/auth.service';
 import { User } from '../entities/user';
 
 
@@ -280,7 +280,7 @@ export class UserService {
       };
       
 
-      this.api.post(`user/profil/${userData.id}`, this.params, headers)
+      this.api.put(`user/profil/${userData.id}`, this.params, headers)
         .subscribe((response: any) => {
           if (response) {
             if (response.statusCode === 201) {
@@ -298,8 +298,8 @@ export class UserService {
             // console.log('Error message: ', error.message);
             reject(error);
           } else if (error.status == 401) {
-            // this.registResult = false;
-            this.toastr.error("This email address is already used.", 'Error', { timeOut: 5000 });
+            // this.authService.logOut();
+            this.toastr.error("Your session has expired. Please log in again.", 'Error', { timeOut: 5000 });
             // console.log('Error message: ', error.message);
             reject(error);
           } else if (error.status == 500) {
@@ -437,7 +437,6 @@ export class UserService {
     })
   }
 
-
   // Get News to server
   getPageUsers(pageNumber?: number, itemsPerPage?: number): Promise<any> {
     console.log('page nomber: ', pageNumber);
@@ -475,7 +474,6 @@ export class UserService {
     });
   }
 
-
   // Get News to server
   getAllUsers(): Promise<any> {
     console.log('Get all users.')
@@ -485,6 +483,7 @@ export class UserService {
         'Authorization': 'Bearer ' + this.api.getAccessToken(),
       };
 
+      console.log('Get all users 2.')
       this.api.get('users', headers)
         .subscribe(result => {
           console.log("users-- -refresh: ", result);
@@ -498,11 +497,20 @@ export class UserService {
           resolve(result);
           return 0;
 
-        }), (error: any) => {
-          this.toastr.error("Can't get users", 'Error', { timeOut: 5000 });
-          console.log(error);
+        }, error => {
+          if (error.status == 401) {
+            // this.authService.logOut();
+
+          localStorage.clear();
+          this.router.navigate(["/login"]);
+          this.toastr.error("Your session has expired. Please log in again.", 'Error', { timeOut: 5000 });
           reject(error);
-        };
+        } else {
+          this.toastr.error("Can't get users", 'Error', { timeOut: 5000 });
+          console.log("Une erreur: ", error);
+          reject(error);
+        }
+        });
     });
   }
 

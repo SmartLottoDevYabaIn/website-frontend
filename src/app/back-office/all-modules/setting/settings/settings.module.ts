@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from 'src/app/app.module';
-import { UserDetalisModule } from 'src/app/front-office/sections/user-detalis/user-detalis.module';
+import { UserDetailsModule } from 'src/app/front-office/sections/user-details/user-details.module';
 
 @NgModule({
   declarations: [SettingsComponent],
@@ -15,7 +15,7 @@ import { UserDetalisModule } from 'src/app/front-office/sections/user-detalis/us
     SettingsRoutingModule,
     RouterModule,
     TranslateModule,
-    UserDetalisModule,
+    UserDetailsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

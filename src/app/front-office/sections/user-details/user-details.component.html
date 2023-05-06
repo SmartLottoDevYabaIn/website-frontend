@@ -394,13 +394,13 @@
             <div class="tab-content pt-0">
                 <div role="tabpanel" id="tab-10" class="tab-pane fade show active">
                     <div class="card-body">
-                        <form>
+                        <form [formGroup]="generalForm" (ngSubmit)="submitGeneral()">
                             <div class="row form-group">
                                 <label for="name" class="col-sm-3 col-form-label input-label"><b>
                                         {{'user.firstName' | translate }}
                                         :</b></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="name" placeholder=""
+                                    <input type="text" class="form-control" id="name" placeholder="" formControlName="firstName"
                                         value="{{userData.firstName}}">
                                 </div>
                             </div>
@@ -409,7 +409,7 @@
                                         {{'user.lastName' | translate }}
                                         :</b></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="name" placeholder=""
+                                    <input type="text" class="form-control" id="name" placeholder="" formControlName="lastName"
                                         value="{{userData.lastName}}">
                                 </div>
                             </div>
@@ -429,7 +429,7 @@
                                         {{'user.skype' | translate }}
                                         :</b></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="skype" placeholder=""
+                                    <input type="text" class="form-control" id="skype" placeholder="" formControlName="skype"
                                         value="{{userData.skype}}">
                                 </div>
                             </div>
@@ -438,34 +438,34 @@
                                         {{'user.web' | translate }}
                                         :</b></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="web" placeholder=""
+                                    <input type="text" class="form-control" id="web" placeholder="" formControlName="websiteLink"
                                         value="{{userData.websiteLink}}">
                                 </div>
                             </div>
-
-
-
                             <div class="row form-group">
                                 <label for="name" class="col-sm-3 col-form-label input-label"><b> Bio
                                         :</b></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="name" placeholder=""
+                                    <input type="text" class="form-control" id="name" placeholder="" formControlName="bio"
                                         value="{{userData.bio}}">
                                 </div>
+                            </div>
+                            <div class="text-end">
+                                <button  data-bs-dismiss="modal" type="submit" class="btn btn-primary" style="margin-left: 20px;">{{'save' | translate }} {{'general' | translate }}</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div role="tabpanel" id="tab-20" class="tab-pane fade">
                     <div class="card-body">
-                        <form>
+                        <form [formGroup]="contactForm" (ngSubmit)="submitContact()">
                             <div class="row form-group">
                                 <label for="phone" class="col-sm-3 col-form-label input-label"><b>
                                         {{'user.phone' | translate }} 1:</b>
                                     <!-- <span class="text-muted">(Optional)</span> -->
                                 </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="phone"
+                                    <input type="text" class="form-control" id="phone" formControlName="phone"
                                         placeholder="+000 000 000 000" value="{{userData.phone}}">
                                 </div>
                             </div>
@@ -475,7 +475,7 @@
                                     <!-- <span class="text-muted">(Optional)</span> -->
                                 </label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="phone"
+                                    <input type="text" class="form-control" id="phone" formControlName="phone2"
                                         placeholder="+000 000 000 000" value="{{userData.phone2}}">
                                 </div>
                             </div>
@@ -484,7 +484,7 @@
                                         {{'user.email' | translate }}
                                         :</b></label>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control" id="email" placeholder="Email"
+                                    <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email"
                                         value="{{userData.email}}">
                                 </div>
                             </div>
@@ -493,22 +493,25 @@
                                         }}</b></label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="zipcode" placeholder="Your zip code" value="25301"
-                                    >
+                                    formControlName="zip">
                                 </div>
+                            </div>
+                            <div class="text-end">
+                                <button  data-bs-dismiss="modal" type="submit" class="btn btn-primary" style="margin-left: 20px;">{{'save' | translate }} {{'contact' | translate }}</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div role="tabpanel" id="tab-30" class="tab-pane fade">
                     <div class="card-body">
-                        <form>
+                        <form [formGroup]="locationForm" (ngSubmit)="submitLocation()">
                             <div class="row form-group">
                                 <label for="phone" class="col-sm-3 col-form-label input-label"><b> {{'user.country' | translate }} :</b>
                                     <!-- <span class="text-muted">(Optional)</span> -->
                                 </label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="country" placeholder="" value="{{userData.country}}"
-                                    >
+                                    formControlName="country">
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -516,7 +519,7 @@
                                         :</b></label>
                                 <div class="col-sm-9">
                                     <div class="mb-3">
-                                        <input type="text" class="form-control" id="location"
+                                        <input type="text" class="form-control" id="location" formControlName="city"
                                             placeholder="{{'user.location' | translate }}" value="{{userData.city}}">
                                     </div>
                                     <!-- <div class="mb-3">
@@ -529,7 +532,7 @@
                                 <label for="addressline1" class="col-sm-3 col-form-label input-label"><b> {{'user.addressLine' |
                                         translate }} 1</b></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="addressline1" placeholder=""
+                                    <input type="text" class="form-control" id="addressline1" placeholder="" formControlName="address1"
                                         value="">
                                 </div>
                             </div>
@@ -537,8 +540,11 @@
                                 <label for="addressline2" class="col-sm-3 col-form-label input-label"><b> {{'user.addressLine' |
                                         translate }} 2</b> <span class="text-muted"> (Optional)</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="addressline2" placeholder="">
+                                    <input type="text" class="form-control" id="addressline2" placeholder="" formControlName="address2">
                                 </div>
+                            </div>
+                            <div class="text-end">
+                                <button  data-bs-dismiss="modal" type="submit" class="btn btn-primary" style="margin-left: 20px;">{{'save' | translate }} {{'location' | translate }}</button>
                             </div>
                         </form>
                     </div>
@@ -618,16 +624,16 @@
                                     >
                                 </div>
                             </div>
+                            <div class="text-end">
+                                <button  data-bs-dismiss="modal" type="submit" class="btn btn-primary" style="margin-left: 20px;">{{'save' | translate }}</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="text-end">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                   {{'close' | translate }}
                 </button>
-                <button  data-bs-dismiss="modal" type="submit" class="btn btn-primary" style="margin-left: 20px;">{{'save' | translate }}</button>
-            </div>
         </div>
     </div>
 </div>

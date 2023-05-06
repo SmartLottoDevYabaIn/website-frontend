@@ -32,7 +32,6 @@ export class SignupComponent implements OnInit {
 
   public isvalidconfirmpassword: boolean = false;
 
-
   constructor(
     private toastr: ToastrService,
     private storage: WebStorage,

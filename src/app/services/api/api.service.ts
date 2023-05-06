@@ -247,7 +247,7 @@ export class ApiService {
   }
 
 
-  // HTTP get
+  // HTTP get with params in url
   get2(endpoint: string, options?: any, body?: Record<string, any>): Observable<any> {
     // if (body) {
     //   let req: String = '';
