@@ -78,7 +78,7 @@ export class UserService {
   // Get user's activity
   getUserActivities(userId: any, pageNumber?: number, itemsPerPage?: number): Promise<any> {
     if (!pageNumber) {
-      pageNumber = 1;
+      pageNumber = 5;
     }
     if (!itemsPerPage) {
       itemsPerPage = 10;
@@ -110,7 +110,6 @@ export class UserService {
         };
     });
   }
-
   /*
   *  Get local user profile data.
   */

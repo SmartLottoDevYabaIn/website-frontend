@@ -103,11 +103,9 @@ export class SignupComponent implements OnInit {
     if (this.form.value.field_country == '1') {
       this.form.value.field_country = 'Cameroon'
     } else if (this.form.value.field_country == '2') {
-      this.form.value.field_country = 'Congo'
+      this.form.value.field_country = 'France'
     } else if (this.form.value.field_country == '3') {
-      this.form.value.field_country = 'Gabon'
-    } else if (this.form.value.field_country == '4') {
-      this.form.value.field_country == 'EqGuinee'
+      this.form.value.field_country = 'Belgique'
     }
 
     console.log("User Datas from reg: ", this.form.value)
